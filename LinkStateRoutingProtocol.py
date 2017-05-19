@@ -6,6 +6,8 @@ l_str = []
 sum_path = 0
 
 def make_file():
+    """This function is used to read the input file,  which containing Network Details.
+    """
     global l
     global l_str
     f_name = input("Input original network topology matrix data file:")
@@ -14,6 +16,8 @@ def make_file():
     f.close()
 
 def create_network_topology():
+    """This function is used to create the N/W Topology, prints the Topology Matrix on the user screen.
+    """
     global l
     global l_str
     
@@ -26,8 +30,15 @@ def create_network_topology():
     l = [[int(i) for i in j] for j in l_str]
 
 
+
+
 def dijkstra(source):
 
+    """Dijkstra Shortest Path Algorithm for weighted graphs. 
+    This function implements Dijkstra's algorithm, 
+    gets the shortest paths from source router to all others. 
+    Here we also create the Parent Child mapping for the graph.
+    """
     for idx_i, i in enumerate(l):
         for idx_j, j in enumerate(i):
             if j == -1:
@@ -74,6 +85,9 @@ def dijkstra(source):
 
 
 def connection_table(source,vd):
+
+	"""This function creates a connection table i.e. the destination and interface combination.
+    """
     global sum_path
     sum_path = 0
 
@@ -87,6 +101,8 @@ def connection_table(source,vd):
 
 def path(source,destination,vp,vd):
 
+    """Gets the path from source to destination & also the cost along the path.
+    """
     list_child = []
     list_parent = []
     for i,j in vp.items():
@@ -106,6 +122,8 @@ def path(source,destination,vp,vd):
 
 
 def router_remove(rem,source):
+    """This function is used to remove (turn-off) the Router from the network
+    """
     global l_str
     del l_str[rem-1]
     for i in l_str:
@@ -116,6 +134,7 @@ def router_remove(rem,source):
 
 
 def best_router():
+    """function to find the Best router for broadcasting"""
     global l
     source = [i for i in range(1,len(l)+1)]
     for j in source:
